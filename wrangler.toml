@@ -1,0 +1,10 @@
+name = "1729"
+type = "webpack"
+account_id = "bdb8fc9e053d4e6dee2f75abd28afc7e"
+workers_dev = true
+route = ""
+zone_id = ""
+webpack_config = "webpack.config.js"
+kv_namespaces = [
+         { binding = "LOCATIONS_1729", preview_id = "742a508302a9412282b5f115b84e3daf", id = "95eb9a5f714d4d5985ed077ad2d9daeb" }
+]

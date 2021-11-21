@@ -1,0 +1,11 @@
+{
+  "name": "location-attestation",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Odysseas Lamtzidis <odyslam@gmail.com>",
+  "license": "yes",
+  "private": false,
+  "dependencies": {
+    "ethers": "^5.5.1"
+  }
+}
