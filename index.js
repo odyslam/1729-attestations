@@ -78,27 +78,9 @@ addEventListener("fetch", (event) => {
   );
 });
 
-/**
- * Many more examples available at:
- *   https://developers.cloudflare.com/workers/examples
- * @param {Request} request
- * @returns {Promise<Response>}
- */
+
 async function handleRequest(request) {
   const { pathname } = new URL(request.url);
-  let signature = "0xddd0a7290af9526056b4e35a077b9a11b513aa0028ec6c9880948544508f3c63" +
-                  "265e99e47ad31bb2cab9646c504576b3abc6939a1710afc08cbf3034d73214b8" +
-                  "1c";
-  let signingAddress = ethers.utils.verifyMessage('hello world', signature);
-  if (pathname.startsWith("/verify")) {
-    let tokens = pathname.split('/');
-    let address = tokens[2];
-    let message = tokens[3];
-    let signature = tokens[4];
-    return new Response(JSON.stringify({"address": address, "message": message, "sig": signature} ), {
-      headers: { "Content-Type": "application/json" },
-    });
-  }
   if (pathname.startsWith("/sign")) {
       let tokens = pathname.split('/');
       let message = decodeURIComponent(tokens.slice(2).join("")).replaceAll(/"/g, '\\\"');;
@@ -139,7 +121,7 @@ async function handleRequest(request) {
         }
       }
       else {
-        result = "location not verified. Signature did not match address";
+        result = "location not verified. Signature did not match address.";
         statusCode = 500;
       }
       return new Response(JSON.stringify({"message": result, "address": address, "location": message} ), {
