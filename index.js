@@ -1,35 +1,5 @@
 import { ethers } from 'ethers';
 
-
-let signHtml = `
-<!DOCTYPE html>
-<script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js"
-        type="application/javascript"></script>
-  <script>
-  async function signData(){
-      const enable = await window.ethereum.enable();
-      if(enable){
-        const provider = new ethers.providers.Web3Provider(window.ethereum)
-        const signer = provider.getSigner()
-        let address = await signer.getAddress();
-        let signature = await signer.signMessage("MSG_TO_SIGN");
-        document.getElementById("sig").innerHTML = signature;
-        document.getElementById("msg").innerHTML = "MSG_TO_SIGN";
-        document.getElementById("acc").innerHTML =  address;
-        }
-      }
-  signData();
-  </script>
-<body>
-    <h1>Sign a Message</h1>
-    <p>
-    Account: <span id="acc"></span>  <br>
-    Message: <span id="msg"></span> <br>
-    Signature: <span id="sig"></span> <br>
-    </p>
-  </body>
-</html>`
-
 let locationHtml= `
 <!DOCTYPE html>
 <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js"
@@ -81,16 +51,6 @@ addEventListener("fetch", (event) => {
 
 async function handleRequest(request) {
   const { pathname } = new URL(request.url);
-  if (pathname.startsWith("/sign")) {
-      let tokens = pathname.split('/');
-      let message = decodeURIComponent(tokens.slice(2).join("")).replaceAll(/"/g, '\\\"');;
-      let output = signHtml.replaceAll("MSG_TO_SIGN", message);
-      return new Response(output, {
-        headers: {
-          "content-type": "text/html;charset=UTF-8",
-        },
-      })
-  }
   if (pathname.startsWith("/attest/location")) {
       return new Response(locationHtml, {
         headers: {
